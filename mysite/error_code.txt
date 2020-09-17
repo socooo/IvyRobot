@@ -1,0 +1,73 @@
+000000: 成功
+999999：未知错误
+
+#utility
+000101: 共享内存写入失败
+000102: 共享内存读取失败
+000201: redis连接失败
+000202: redis写入失败
+000203: redis读取失败
+000204: 切换至redis备机时也连不上
+000301: sftp 读取失败
+000302: sftp get失败
+000303: sftp put失败
+
+
+#TCP Sever
+000201: TCP Server Exception
+
+#cifmas
+010101|cifmas|cifmas_add|保存时出现Exception
+010102|cifmas|cifmas_add|校验时未通过
+
+010201|cifmas|cifmas_amd|保存时出现Exception
+010202|cifmas|cifmas_amd|校验时未通过
+
+010301|cifmas|cifmas_del|保存时出现Exception
+010302|cifmas|cifmas_del|校验时未通过
+
+#010400|cifmas|cifmas_lst|保存时出现Exception
+#010400|cifmas|cifmas_lst|校验时未通过
+
+#010500|cifmas|cifmas_lst2lvl|保存时出现Exception
+#010500|cifmas|cifmas_lst2lvl|校验时未通过
+
+#010600|cifmas|cifmas_dsp|保存时出现Exception
+#010600|cifmas|cifmas_dsp|校验时未通过
+
+010701|cifmas|cifmas_tmp_add|保存时出现Exception
+010702|cifmas|cifmas_tmp_add|校验时未通过
+
+010801|cifmas|cifmas_tmp_amd|保存时出现Exception
+010802|cifmas|cifmas_tmp_amd|校验时未通过
+
+010901|cifmas|cifmas_tmp_del|保存时出现Exception
+010902|cifmas|cifmas_tmp_del|校验时未通过
+
+#011001|cifmas|cifmas_tmp_lst|保存时出现Exception
+#011002|cifmas|cifmas_tmp_lst|校验时未通过
+
+#011101|cifmas|cifmas_tmp_dsp|保存时出现Exception
+#011102|cifmas|cifmas_tmp_dsp|校验时未通过
+
+011201|cifmas|cifmas_tmp_amd2lvl|保存时出现Exception
+011202|cifmas|cifmas_tmp_amd2lvl|校验时未通过
+
+011301|cifmas|cifmas_tmp_del2lvl|保存时出现Exception
+011302|cifmas|cifmas_tmp_del2lvl|校验时未通过
+
+011401|cifmas|cifmas_tmp_app|保存时出现Exception
+011402|cifmas|cifmas_tmp_app|校验时未通过
+
+011501|cifmas|cifmas_echart_0002|调用Spark时出现Exception
+011502|cifmas|cifmas_echart_0002|
+
+011601|cifmas|cifmas_echart_0003|调用Spark时出现Exception
+011602|cifmas|cifmas_echart_0003s|
+
+#019001|cifmas|page_not_found|无错误
+#019002|cifmas|page_not_found|无错误
+
+#019101|cifmas|page_error|无错误
+#019102|cifmas|page_error|无错误
+

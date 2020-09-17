@@ -1,0 +1,106 @@
+{% extends "kernal/base.html" %}
+{% load staticfiles %} 
+{% block title %}用户信息查询{% endblock %}
+{% block content %}
+
+<div class="row text-center vertical-middle-sm">
+	<h3>用户信息查询</h3>
+	<h1></h1>
+</div>
+	
+<div>
+	<p class="text-right">
+		<a id="user_mas_tmp_add" onclick="user_mas_tmp_add()"><sspan class="glyphicon glyphicon-plus"></sspan>添加菜单</a>
+	</p>
+	<table class="table table-hover">
+		<tr>
+			<td>编号</td>
+			<td>工号</td>
+			<td>姓名</td>
+			<td>报到日期</td>
+			<td>地址</td>
+			<td>直线电话</td>
+			<td>移动电话</td>
+			<td>状态</td>
+			<td>操作</td>
+		</tr>
+		{% for user_mas in user_mas_lst %}
+		<tr>
+			<td><a  href="{{ user_mas.get_absolute_url_dsp }}">{{ user_mas.id }}</a></td>
+			<td>{{ user_mas.employee_id }}</td>
+			<td>{{ user_mas.name }}</td>
+			<td>{{ user_mas.on_board_date }}</td>
+			<td>{{ user_mas.address }}</td>
+			<td>{{ user_mas.phone }}</td>
+			<td>{{ user_mas.mobile_phone }}</td>
+			<td>
+				{% if user_mas.status == 'A' %}正常{% endif %}
+				{% if user_mas.status == 'S' %}挂起{% endif %}
+				{% if user_mas.status == 'D' %}关闭{% endif %}
+			</td>
+			<td>
+				<a name="edit" href="{{ user_mas_tmp.get_absolute_url_amd }}" ><span class="glyphicon glyphicon-pencil"></span></a>
+				<a name="delete" href="javascript:" onclick="del_user_mas_2lvl(this, '{{ user_mas.id}}')"><span class="glyphicon glyphicon-trash"></span></a>
+			</td>
+		</tr>
+		{% empty %}
+		<p>没有发现记录</p>
+		{% endfor %}
+	</table>
+	<table class="table">
+	<tr>
+		<td width="40%"></td>
+		<td width="33%">{% include "paginator.html" %}</td>
+		<td width="33%"></td>
+	</tr>
+	</table>
+</div>
+
+<script type="text/javascript"
+	src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+<script type="text/javascript" src='{% static "js/layer.js" %}'></script>
+<script>
+	function user_mas_tmp_add() {
+		window.location.href="{% url "kernal:user_mas_tmp_add" %}";
+	}
+
+	function del_user_mas_2lvl(the, id) {
+		var employee_id=$(the).parents("tr").children("td").eq(1).text();
+		var name=$(the).parents("tr").children("td").eq(2).text();
+		name=employee_id + ": " + name;
+		var func="user_mas_lst2lvl";
+		var index = layer.open
+		({
+			type : 1,
+			skin : "layui-layer-rim",
+			title : "删除客户",
+			area : [ '400px', '200px' ],
+			content : '<div class="text-center" style="margin-top:20px"><p>是否确定删除用户："'+name+'"</p></div>',
+			btn : [ '确定', '取消' ],
+			yes : function(index, layer) {
+				$.ajax
+				({
+					url : '{% url "kernal:user_mas_tmp_del2lvl" %}',
+					type : 'POST',
+					data : {
+						"id"  :id,
+						"func":func,
+					},
+					success : function(e) {
+						if (e == "000000") {
+							parent.location.reload();
+							layer.msg("已删除");
+						} if (e == "000001") {
+							parent.location.reload();
+							layer.msg("在临时档中发现重复记录，请检查下是否重复删除过？");
+						} else {
+							layer.msg("删除失败");
+						}
+					},
+				});
+			},
+		});
+	}
+</script>
+
+{% endblock %}

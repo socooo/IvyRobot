@@ -1,0 +1,66 @@
+{% extends "article/base.html" %} 
+{% load staticfiles %} 
+{% block title %}article column{% endblock %} 
+{% block content %}
+       <div id="container_line" style="height: 400%"></div>
+       <div id="container_bar" style="height: 400%"></div>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+       <script type="text/javascript">
+			var dom = document.getElementById("container_line");
+			var myChart = echarts.init(dom);
+			var app = {};
+			option = null;
+			option = {
+			    xAxis: {
+			        type: 'category',
+			        data: {{ names | safe }}
+			    },
+			    yAxis: {
+			        type: 'value'
+			    },
+			    series: [{
+			        data: {{ values | safe }},
+			        type: 'line'
+			    }]
+			};
+			;
+			if (option && typeof option === "object") {
+			    myChart.setOption(option, true);
+			}
+       </script>
+       
+       <script type="text/javascript">
+			var dom_bar = document.getElementById("container_bar");
+			var myChart_bar = echarts.init(dom_bar);
+			var app_bar = {};
+			option_bar = null;
+			option_bar = {
+			    xAxis: {
+			        type: 'category',
+			        data: {{ names | safe }}
+			    },
+			    yAxis: {
+			        type: 'value'
+			    },
+			    series: [{
+			        data: {{ values | safe }},
+			        type: 'line'
+			    }]
+			};
+			;
+			if (option_bar && typeof option_bar === "object") {
+			    myChart_bar.setOption(option_bar, true);
+			}
+       </script>
+
+{% endblock %}
+
+

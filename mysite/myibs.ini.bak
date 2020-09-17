@@ -1,0 +1,23 @@
+[baseconf]
+product_name = MyIBS
+product_version = 1.0.0.0 Arctic Fox
+spark_home = D:\\workspace_python\\mysite\\spark-1.6.0-bin-hadoop2.6
+
+[batch]
+batch_job_001_start = True
+batch_job_001_start_date = 2018-11-17
+batch_job_001_start_time = 09:00:00
+batch_job_001_internal_time = 5
+batch_job_001_status = STARTED
+batch_job_002_start = True
+batch_job_002_start_date = 2018-11-19
+batch_job_002_start_time = 11:00:00
+batch_job_002_internal_time = 10
+batch_job_002_status = STARTED
+
+[asyn_TCP_server_001]
+port = 7666
+timeout = 20
+msg_length = 1024
+con_connection = 10
+

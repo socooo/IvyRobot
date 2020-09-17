@@ -1,0 +1,101 @@
+{% extends "kernal/base.html" %}
+{% load staticfiles %} 
+{% block title %}菜单信息查询{% endblock %}
+{% block content %}
+
+<div class="row text-center vertical-middle-sm">
+	<h3>菜单信息查询(经办)</h3>
+	<h1></h1>
+</div>
+	
+<div>
+	<p class="text-right">
+		<a id="menu_mas_tmp_add" onclick="menu_mas_add()"><span class="glyphicon glyphicon-plus"></span>添加菜单</a>
+	</p>
+	<table class="table table-hover">
+		<tr>
+			<td>菜单编号</td>
+			<td>菜单级别</td>
+			<td>父菜单ID</td>
+			<td>菜单名称</td>
+			<td>菜单短描述</td>
+			<td>菜单状态</td>
+			<td>操作</td>
+		</tr>
+		{% for menu_mas_tmp in menu_mas_tmp_lst %}
+		<tr>
+			<td><a  href="{{ menu_mas_tmp.get_absolute_url_dsp }}">{{ menu_mas_tmp.id }}</a></td>
+			<td>{{ menu_mas_tmp.menu_lvl }}</td>
+			<td>{{ menu_mas_tmp.menu_parent_id }}</td>
+			<td>{{ menu_mas_tmp.menu_name }}</td>
+			<td>{{ menu_mas_tmp.menu_sht_desc }}</td>
+			<td>
+				{% if menu_mas_tmp.status == 'A' %}正常{% endif %}
+				{% if menu_mas_tmp.status == 'S' %}挂起{% endif %}
+				{% if menu_mas_tmp.status == 'D' %}关闭{% endif %}
+			</td>
+			<td>
+				<a name="edit" href="{{ menu_mas_tmp.get_absolute_url_amd }}" ><span class="glyphicon glyphicon-pencil"></span></a>
+				<a name="delete" href="javascript:" onclick="del_menu_mas_tmp(this, '{{menu_mas_tmp.id}}')"><span class="glyphicon glyphicon-trash"></span></a>
+			</td>
+		</tr>
+		{% empty %}
+		<p>没有发现记录</p>
+		{% endfor %}
+	</table>
+	<table class="table">
+	<tr>
+		<td width="40%"></td>
+		<td width="33%">{% include "paginator.html" %}</td>
+		<td width="33%"></td>
+	</tr>
+	</table>
+</div>
+
+<script type="text/javascript"
+	src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+<script type="text/javascript" src='{% static "js/layer.js" %}'></script>
+<script>
+	function menu_mas_add() {
+		window.location.href="{% url "kernal:menu_mas_tmp_add" %}";
+	}
+	
+	function del_menu_mas_tmp(the, id) {
+
+		var menu_name=$(the).parents("tr").children("td").eq(4).text();
+		var menu_sht_desc=$(the).parents("tr").children("td").eq(5).text();
+
+		name=menu_name + ": " + menu_sht_desc;
+		var func="menu_mas_tmp_lst";
+		var index = layer.open
+		({
+			type : 1,
+			skin : "layui-layer-rim",
+			title : "删除客户",
+			area : [ '400px', '200px' ],
+			content : '<div class="text-center" style="margin-top:20px"><p>是否确定删除菜单："'+name+'"</p></div>',
+			btn : [ '确定', '取消' ],
+			yes : function(index, layero) {
+				$.ajax
+				({
+					url : '{% url "kernal:menu_mas_tmp_del" %}',
+					type : 'POST',
+					data : {
+						"id"  :id,
+						"func":func,
+					},
+					success : function(e) {
+						if (e == "000000") {
+							parent.location.reload();
+							layer.msg("已删除");
+						} else {
+							layer.msg("删除失败");
+						}
+					},
+				});
+			},
+		});
+	}
+</script>
+
+{% endblock %}

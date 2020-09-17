@@ -1,0 +1,84 @@
+{% extends "kernal/base.html" %}
+{% load staticfiles %}
+{% block title%}修改用户角色关联信息{% endblock %}
+{% block content %}
+
+<div class="row text-center vertical-middle-sm">
+	<h3>修改用户角色关联信息(经办)</h3>
+	<h1></h1>
+	<div class="row">
+		<div class="col-md-6">
+			<form class="form-horizontal" action="." method="post">
+				{% csrf_token %} {{ user_role_mas_tmp_form.non_field_errors }}
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ user_role_mas_tmp_form.id.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ user_role_mas_tmp_form.id}}</div>
+					{{user_role_mas_tmp_form.id.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>用户名称</span>
+					</div>
+					<div class="col-md-8 text-left">
+						<select name="username_list" id="username_list">
+							{% for obj in username_list %}
+								<option value ="{{ obj }}">{{ obj }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>角色名称</span>
+					</div>
+					<div class="col-md-8 text-left">
+						<select name="role_name_list" id="role_name_list">
+							{% for obj in role_name_list %}
+								<option value ="{{ obj }}">{{ obj }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ user_role_mas_tmp_form.user_role_name.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ user_role_mas_tmp_form.user_role_name}}</div>
+					{{user_role_mas_tmp_form.user_role_name.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ user_role_mas_tmp_form.status.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ user_role_mas_tmp_form.status}}</div>
+					{{user_role_mas_tmp_form.status.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ user_role_mas_tmp_form.func.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ user_role_mas_tmp_form.func}}</div>
+					{{user_role_mas_tmp_form.func.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<input type="submit" class="btn btn-primary" value="提交">
+					<input type="button" class="btn btn-primary" name="back" value="返回" onClick="javascript:history.back()">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript"src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+{% endblock %}
+
+

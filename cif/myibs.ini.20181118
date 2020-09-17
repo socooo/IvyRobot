@@ -1,0 +1,5 @@
+[baseconf]
+SPARK_HOME=D:\\workspace_python\\mysite\\spark-1.6.0-bin-hadoop2.6
+
+[conf1]
+#processor=20

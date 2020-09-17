@@ -1,0 +1,157 @@
+{% extends "kernal/base.html" %}
+{% load staticfiles %}
+{% block title%}显示用户信息{% endblock %}
+{% block content %}
+
+<div class="row text-center vertical-middle-sm">
+	<h3>显示用户信息</h3>
+	<h1></h1>
+	<div class="row">
+		<div class="col-md-6">
+			<form class="form-horizontal" action="." method="post">
+				{% csrf_token %}
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>序号：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ user_mas_form.id}}</div>
+					{{user_mas_form.id.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>工号：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ user_mas_form.employee_id}}</div>
+					{{user_mas_form.employee_id.errors }}
+				</div>
+				
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>姓名：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ user_mas_form.name}}</div>
+					{{user_mas_form.name.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>报到日期：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ user_mas_form.on_board_date }}</div>
+					{{ user_mas_form.on_board_date.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>地址：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ user_mas_form.address}}</div>
+					{{user_mas_form.address.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>年龄：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ user_mas_form.age}}</div>
+					{{user_mas_form.age.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>直线电话：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ user_mas_form.phone}}</div>
+					{{user_mas_form.phone.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>移动电话：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ user_mas_form.mobile_phone}}</div>
+					{{user_mas_form.mobile_phone.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>状态：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ user_mas_form.status}}</div>
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>交易功能：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ user_mas_form.func}}</div>
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>创建日期：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ user_mas_form.inp_date}}</div>
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>修改日期：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ user_mas_form.app_date}}</div>
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<a name="edit" href="/kernal/user_mas_tmp_amd2lvl/{{ user_mas_form.id }}/" ><span class="glyphicon glyphicon-pencil"></span>&nbsp&nbsp编辑</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<a name="delete" href="javascript:" onclick="del_user_mas_2lvl(this,'{{user_mas_form.id}}')"><span class="glyphicon glyphicon-trash"></span>&nbsp&nbsp删除</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<a name="back" href="/kernal/user_mas_lst2lvl/" ><span class="glyphicon glyphicon-backward"></span>&nbsp&nbsp返回</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript"src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+<script type="text/javascript" src='{% static "js/layer.js" %}'></script>
+<script>
+	function del_user_mas_2lvl(the, id) {
+		var employee_id="{{ user_mas_form.employee_id}}";
+		var name="{{ user_mas_form.name}}";
+		name=employee_id + ": " + name;
+		var func="menu_mas_dsp";
+		var index = layer.open
+		({
+			type : 1,
+			skin : "layui-layer-rim",
+			title : "删除菜单",
+			area : [ '400px', '200px' ],
+			content : '<div class="text-center" style="margin-top:20px"><p>是否确定删除菜单："'+name+'"</p></div>',
+			btn : [ '确定', '取消' ],
+			yes : function(index, layero) {
+				$.ajax
+				({
+					url : '{% url "kernal:menu_mas_tmp_del2lvl" %}',
+					type : 'POST',
+					data : {
+						"id"  :id,
+						"func":func,
+					},
+					success : function(e) {
+						if (e == "000000") {
+							layer.msg("已删除");
+							window.location.href='{% url "kernal:menu_mas_lst2lvl" %}';
+						} else {
+							layer.msg("删除失败");
+						}
+					},
+				});
+			},
+		});
+	}
+</script>
+
+{% endblock %}
+
+

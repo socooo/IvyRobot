@@ -1,0 +1,104 @@
+{% extends "cif/base.html" %}
+{% load staticfiles %}
+{% block title %}客户信息查询{% endblock %} 
+{% block content %}
+
+<div class="row text-center vertical-middle-sm">
+	<h3>客户信息查询(二级交易)</h3>
+	<h1></h1>
+</div>
+	
+<div>
+	<p class="text-right">
+<!-- 		<button id="cif_mas_add" onclick="cif_mas_add()" class="btn btn-primary">添加客户</button> -->
+		<a id="cif_mas_tmp_add" onclick="cif_mas_tmp_add()"><span class="glyphicon glyphicon-plus"></span>添加客户</a>
+	</p>
+	<table class="table table-hover">
+		<tr>
+			<td>客户号</td>
+			<td>证件类型</td>
+			<td>证件国别</td>
+			<td>证件号</td>
+			<td>客户（姓）</td>
+			<td>客户（名）</td>
+			<td>客户手机</td>
+			<td>客户状态</td>
+			<td>操作</td>
+		</tr>
+		{% for cif_mas in cifmas_lst %}
+		<tr>
+			<td><a  href="{{ cif_mas.get_absolute_url_dsp }}">{{ cif_mas.customer_id }}</a></td>
+			<td>{{ cif_mas.id_type }}</td>
+			<td>{{ cif_mas.id_country }}</td>
+			<td>{{ cif_mas.id_no }}</td>
+			<td>{{ cif_mas.last_name }}</td>
+			<td>{{ cif_mas.first_name }}</td>
+			<td>{{ cif_mas.handphone }}</td>
+			<td>
+				{% if cif_mas.status == 'A' %}正常{% endif %}
+				{% if cif_mas.status == 'S' %}挂起{% endif %}
+				{% if cif_mas.status == 'D' %}关闭{% endif %}
+			</td>
+			<td>
+				<a name="edit" href="{{ cif_mas.get_absolute_url_amd2lvl }}" ><span class="glyphicon glyphicon-pencil"></span></a>
+				<a name="delete" href="javascript:" onclick="del_cifmas_tmp_2lvl(this, '{{cif_mas.customer_id}}')"><span class="glyphicon glyphicon-trash"></span></a>
+			</td>
+		</tr>
+		{% empty %}
+		<p>没有发现记录</p>
+		{% endfor %}
+	</table>
+	<table class="table">
+	<tr>
+		<td width="40%"></td>
+		<td width="33%">{% include "paginator.html" %}</td>
+		<td width="33%"></td>
+	</tr>
+	</table>
+</div>
+
+<script type="text/javascript"
+	src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+<script type="text/javascript" src='{% static "js/layer.js" %}'></script>
+<script>
+	function cif_mas_tmp_add() {
+		window.location.href="{% url "cif:cifmas_tmp_add" %}";
+	}
+	
+	function del_cifmas_tmp_2lvl(the, customer_id) {
+		var first_name=$(the).parents("tr").children("td").eq(5).text();
+		var last_name=$(the).parents("tr").children("td").eq(4).text();
+		name=last_name+first_name;
+		var func="cifmas_list";
+		var index = layer.open
+		({
+			type : 1,
+			skin : "layui-layer-rim",
+			title : "删除客户",
+			area : [ '400px', '200px' ],
+			content : '<div class="text-center" style="margin-top:20px"><p>是否确定删除客户："'+name+'"</p></div>',
+			btn : [ '确定', '取消' ],
+			yes : function(index, layero) {
+				$.ajax
+				({
+					url : '{% url "cif:cifmas_tmp_del2lvl" %}',
+					type : 'POST',
+					data : {
+						"customer_id"  :customer_id,
+						"func"     :func,
+					},
+					success : function(e) {
+						if (e == "000000") {
+							parent.location.reload();
+							layer.msg("已删除");
+						} else {
+							layer.msg("删除失败");
+						}
+					},
+				});
+			},
+		});
+	}
+</script>
+
+{% endblock %}

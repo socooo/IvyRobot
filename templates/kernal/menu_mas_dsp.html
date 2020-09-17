@@ -1,0 +1,130 @@
+{% extends "kernal/base.html" %}
+{% load staticfiles %}
+{% block title%}显示菜单信息{% endblock %}
+{% block content %}
+
+<div class="row text-center vertical-middle-sm">
+	<h3>显示菜单信息</h3>
+	<h1></h1>
+	<div class="row">
+		<div class="col-md-6">
+			<form class="form-horizontal" action="." method="post">
+				{% csrf_token %}
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>菜单级别：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_form.menu_lvl}}</div>
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>父菜单ID：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_form.menu_parent_id}}</div>
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>菜单名称：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_form.menu_name}}</div>
+
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>菜单短描述：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_form.menu_sht_desc}}</div>
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>菜单长描述：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_form.menu_long_desc}}</div>
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>状态：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_form.status}}</div>
+
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>交易功能：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_form.func}}</div>
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>创建日期：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_form.inp_date}}</div>
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>修改日期：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_form.app_date}}</div>
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<a name="edit" href="/kernal/menu_mas_tmp_amd2lvl/{{ menu_mas_form.id }}/" ><span class="glyphicon glyphicon-pencil"></span>&nbsp&nbsp编辑</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<a name="delete" href="javascript:" onclick="del_menu_mas_2lvl(this,'{{menu_mas_form.id}}')"><span class="glyphicon glyphicon-trash"></span>&nbsp&nbsp删除</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<a name="back" href="/kernal/role_mas_lst2lvl/" ><span class="glyphicon glyphicon-backward"></span>&nbsp&nbsp返回</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript"src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+<script type="text/javascript" src='{% static "js/layer.js" %}'></script>
+<script>
+	function del_menu_mas_2lvl(the, id) {
+		var menu_name="{{ menu_mas_form.menu_name}}";
+		var menu_sht_desc="{{ menu_mas_form.menu_sht_desc}}";
+		name=menu_name + ": " + menu_sht_desc;
+		var func="menu_mas_dsp";
+		var index = layer.open
+		({
+			type : 1,
+			skin : "layui-layer-rim",
+			title : "删除菜单",
+			area : [ '400px', '200px' ],
+			content : '<div class="text-center" style="margin-top:20px"><p>是否确定删除菜单："'+name+'"</p></div>',
+			btn : [ '确定', '取消' ],
+			yes : function(index, layero) {
+				$.ajax
+				({
+					url : '{% url "kernal:menu_mas_tmp_del2lvl" %}',
+					type : 'POST',
+					data : {
+						"id"  :id,
+						"func":func,
+					},
+					success : function(e) {
+						if (e == "000000") {
+							layer.msg("已删除");
+							window.location.href='{% url "kernal:menu_mas_lst2lvl" %}';
+						} else {
+							layer.msg("删除失败");
+						}
+					},
+				});
+			},
+		});
+	}
+</script>
+
+{% endblock %}
+
+

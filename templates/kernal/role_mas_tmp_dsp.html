@@ -1,0 +1,121 @@
+{% extends "kernal/base.html" %}
+{% load staticfiles %}
+{% block title%}显示角色信息{% endblock %}
+{% block content %}
+
+<div class="row text-center vertical-middle-sm">
+	<h3>显示角色信息(经办)</h3>
+	<h1></h1>
+	<div class="row">
+		<div class="col-md-6">
+			<form class="form-horizontal" action="." method="post">
+				{% csrf_token %}
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>角色序号：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ role_mas_tmp_form.id}}</div>
+					{{role_mas_tmp_form.id.errors }}
+				</div>
+				
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>角色：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ role_mas_tmp_form.role_name}}</div>
+					{{role_mas_tmp_form.role_name.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>角色描述：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ role_mas_tmp_form.role_desc}}</div>
+					{{role_mas_tmp_form.role_desc.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>电子邮件：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ role_mas_tmp_form.email}}</div>
+					{{role_mas_tmp_form.email.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>联系手机：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ role_mas_tmp_form.handphone}}</div>
+					{{role_mas_tmp_form.handphone.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>状态：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ role_mas_tmp_form.status}}</div>
+					{{role_mas_tmp_form.status.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>功能：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ role_mas_tmp_form.func}}</div>
+					{{role_mas_tmp_form.func.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<a name="edit" href="/kernal/role_mas_tmp_amd/{{ role_mas_tmp_form.id }}/" ><span class="glyphicon glyphicon-pencil"></span>&nbsp&nbsp编辑</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<a name="delete" href="javascript:" onclick="del_role_mas_tmp(this,'{{role_mas_tmp_form.id}}')"><span class="glyphicon glyphicon-trash"></span>&nbsp&nbsp删除</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<a name="back" href="/kernal/role_mas_tmp_lst/" ><span class="glyphicon glyphicon-backward"></span>&nbsp&nbsp返回</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<a name="approve" href="/kernal/role_mas_tmp_app/{{ role_mas_tmp_form.id}}/" ><span class="fa fa-check-square"></span>&nbsp&nbsp复核</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript"src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+<script type="text/javascript" src='{% static "js/layer.js" %}'></script>
+<script>
+	function del_role_mas_tmp(the, id) {
+		var role_name="{{ role_mas_tmp_form.role_name}}";
+		name=role_name;
+		var func="role_mas_tmp_lst";
+		var index = layer.open
+		({
+			type : 1,
+			skin : "layui-layer-rim",
+			title : "删除角色",
+			area : [ '400px', '200px' ],
+			content : '<div class="text-center" style="margin-top:20px"><p>是否确定删除角色："'+name+'"</p></div>',
+			btn : [ '确定', '取消' ],
+			yes : function(index, layero) {
+				$.ajax
+				({
+					url : '{% url "kernal:role_mas_tmp_del" %}',
+					type : 'POST',
+					data : {
+						"id":id,
+						"func":func,
+					},
+					success : function(e) {
+						if (e == "000000") {
+							layer.msg("已删除");
+							window.location.href='{% url "kernal:role_mas_tmp_lst" %}';
+						} else {
+							layer.msg("删除失败");
+						}
+					},
+				});
+			},
+		});
+	}
+</script>
+
+{% endblock %}
+
+

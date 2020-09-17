@@ -1,0 +1,48 @@
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    url(r'^role_mas_tmp_add/$', views.role_mas_tmp_add, name="role_mas_tmp_add"),
+    url(r'^role_mas_tmp_lst/$', views.role_mas_tmp_lst, name="role_mas_tmp_lst"),
+    url(r'^role_mas_lst2lvl/$', views.role_mas_lst2lvl, name="role_mas_lst2lvl"),
+    url(r'^role_mas_dsp/(?P<id>\d+)/$', views.role_mas_dsp, name="role_mas_dsp"),
+    url(r'^role_mas_tmp_dsp/(?P<id>\d+)/$', views.role_mas_tmp_dsp, name="role_mas_tmp_dsp"),
+    url(r'^role_mas_tmp_amd/(?P<id>\d+)/$', views.role_mas_tmp_amd, name="role_mas_tmp_amd"),
+    url(r'^role_mas_tmp_amd2lvl/(?P<id>\d+)/$', views.role_mas_tmp_amd2lvl, name="role_mas_tmp_amd2lvl"),
+    url(r'^role_mas_tmp_del/$', views.role_mas_tmp_del, name="role_mas_tmp_del"),
+    url(r'^role_mas_tmp_del2lvl/$', views.role_mas_tmp_del2lvl, name="role_mas_tmp_del2lvl"),
+    url(r'^role_mas_tmp_app/(?P<id>\d+)/$', views.role_mas_tmp_app, name="role_mas_tmp_app"),
+
+    url(r'^menu_mas_tmp_add/$', views.menu_mas_tmp_add, name="menu_mas_tmp_add"),
+    url(r'^menu_mas_tmp_lst/$', views.menu_mas_tmp_lst, name="menu_mas_tmp_lst"),
+    url(r'^menu_mas_lst2lvl/$', views.menu_mas_lst2lvl, name="menu_mas_lst2lvl"),
+    url(r'^menu_mas_dsp/(?P<id>\d+)/$', views.menu_mas_dsp, name="menu_mas_dsp"),
+    url(r'^menu_mas_tmp_dsp/(?P<id>\d+)/$', views.menu_mas_tmp_dsp, name="menu_mas_tmp_dsp"),
+    url(r'^menu_mas_tmp_amd/(?P<id>\d+)/$', views.menu_mas_tmp_amd, name="menu_mas_tmp_amd"),
+    url(r'^menu_mas_tmp_amd2lvl/(?P<id>\d+)/$', views.menu_mas_tmp_amd2lvl, name="menu_mas_tmp_amd2lvl"),
+    url(r'^menu_mas_tmp_del/$', views.menu_mas_tmp_del, name="menu_mas_tmp_del"),
+    url(r'^menu_mas_tmp_del2lvl/$', views.menu_mas_tmp_del2lvl, name="menu_mas_tmp_del2lvl"),
+    url(r'^menu_mas_tmp_app/(?P<id>\d+)/$', views.menu_mas_tmp_app, name="menu_mas_tmp_app"),
+
+    url(r'^user_role_mas_tmp_add/$', views.user_role_mas_tmp_add, name="user_role_mas_tmp_add"),
+    url(r'^user_role_mas_tmp_lst/$', views.user_role_mas_tmp_lst, name="user_role_mas_tmp_lst"),
+    url(r'^user_role_mas_lst2lvl/$', views.user_role_mas_lst2lvl, name="user_role_mas_lst2lvl"),
+    url(r'^user_role_mas_dsp/(?P<id>\d+)/$', views.user_role_mas_dsp, name="user_role_mas_dsp"),
+    url(r'^user_role_mas_tmp_dsp/(?P<id>\d+)/$', views.user_role_mas_tmp_dsp, name="user_role_mas_tmp_dsp"),
+    url(r'^user_role_mas_tmp_amd/(?P<id>\d+)/$', views.user_role_mas_tmp_amd, name="user_role_mas_tmp_amd"),
+    url(r'^user_role_mas_tmp_amd2lvl/(?P<id>\d+)/$', views.user_role_mas_tmp_amd2lvl, name="user_role_mas_tmp_amd2lvl"),
+    url(r'^user_role_mas_tmp_del/$', views.user_role_mas_tmp_del, name="user_role_mas_tmp_del"),
+    url(r'^user_role_mas_tmp_del2lvl/$', views.user_role_mas_tmp_del2lvl, name="user_role_mas_tmp_del2lvl"),
+    url(r'^user_role_mas_tmp_app/(?P<id>\d+)/$', views.user_role_mas_tmp_app, name="user_role_mas_tmp_app"),
+
+    url(r'^user_mas_tmp_add/$', views.user_mas_tmp_add, name="user_mas_tmp_add"),
+    url(r'^user_mas_tmp_lst/$', views.user_mas_tmp_lst, name="user_mas_tmp_lst"),
+    url(r'^user_mas_lst2lvl/$', views.user_mas_lst2lvl, name="user_mas_lst2lvl"),
+    url(r'^user_mas_dsp/(?P<id>\d+)/$', views.user_mas_dsp, name="user_mas_dsp"),
+    url(r'^user_mas_tmp_dsp/(?P<id>\d+)/$', views.user_mas_tmp_dsp, name="user_mas_tmp_dsp"),
+    url(r'^user_mas_tmp_amd/(?P<id>\d+)/$', views.user_mas_tmp_amd, name="user_mas_tmp_amd"),
+    url(r'^user_mas_tmp_amd2lvl/(?P<id>\d+)/$', views.user_mas_tmp_amd2lvl, name="user_mas_tmp_amd2lvl"),
+    url(r'^user_mas_tmp_del/$', views.user_mas_tmp_del, name="user_mas_tmp_del"),
+    url(r'^user_mas_tmp_del2lvl/$', views.user_mas_tmp_del2lvl, name="user_mas_tmp_del2lvl"),
+    url(r'^user_mas_tmp_app/(?P<id>\d+)/$', views.user_mas_tmp_app, name="user_mas_tmp_app"),
+]

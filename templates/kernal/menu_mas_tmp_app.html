@@ -1,0 +1,83 @@
+{% extends "kernal/base.html" %}
+{% load staticfiles %}
+{% block title%}复核菜单信息{% endblock %}
+{% block content %}
+
+<div class="row text-center vertical-middle-sm">
+	<h3>复核菜单信息(复核)</h3>
+	<h1></h1>
+	<div class="row">
+		<div class="col-md-6">
+			<form class="form-horizontal" action="." method="post">
+				{% csrf_token %} {{ menu_mas_form.non_field_errors }}
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ menu_mas_form.menu_lvl.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_form.menu_lvl}}</div>
+					{{menu_mas_form.menu_lvl.errors }}
+				</div>
+				
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ menu_mas_form.menu_parent_id.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_form.menu_parent_id}}</div>
+					{{menu_mas_form.menu_parent_id.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ menu_mas_form.menu_name.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_form.menu_name}}</div>
+					{{menu_mas_form.menu_name.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ menu_mas_form.menu_sht_desc.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_form.menu_sht_desc}}</div>
+					{{menu_mas_form.menu_sht_desc.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ menu_mas_form.menu_long_desc.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_form.menu_long_desc}}</div>
+					{{menu_mas_form.menu_long_desc.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ menu_mas_form.status.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_form.status}}</div>
+					{{menu_mas_form.status.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ menu_mas_form.func.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_form.func}}</div>
+					{{menu_mas_form.func.errors }}
+				</div>
+
+
+				<div class="row" style="margin-top: 10px;">
+					<input type="submit" class="btn btn-primary" value="提交">
+					<input type="button" class="btn btn-primary" name="back" value="返回" onClick="javascript:history.back()">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript"src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+{% endblock %}
+
+

@@ -1,0 +1,186 @@
+{% extends "cif/base.html" %}
+{% load staticfiles %}
+{% block title%}显示客户信息{% endblock %}
+{% block content %}
+
+<div class="row text-center vertical-middle-sm">
+	<h3>显示客户信息(一级交易)</h3>
+	<h1></h1>
+	<div class="row">
+		<div class="col-md-6">
+			<form class="form-horizontal" action="." method="post">
+				{% csrf_token %}
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>客户号：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_tmp_Form.customer_id}}</div>
+					{{cif_mas_tmp_Form.customer_id.errors }}
+				</div>
+				
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>证件号：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_tmp_Form.id_no}}</div>
+					{{cif_mas_tmp_Form.id_no.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>证件类型：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_tmp_Form.id_type}}</div>
+					{{cif_mas_tmp_Form.id_type.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>证件国别：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_tmp_Form.id_country}}</div>
+					{{cif_mas_tmp_Form.id_country.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>客户(名)：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_tmp_Form.first_name}}</div>
+					{{cif_mas_tmp_Form.first_name.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>客户(姓)：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_tmp_Form.last_name}}</div>
+					{{cif_mas_tmp_Form.last_name.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>客户地址：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_tmp_Form.address }}</div>
+					<span class="error-msg">{{cif_mas_tmp_Form.address.errors }}</span>
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>客户年龄：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_tmp_Form.age}}</div>
+					{{cif_mas_tmp_Form.age.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>余额：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_tmp_Form.balance}}</div>
+					{{cif_mas_tmp_Form.balance.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>生日：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_tmp_Form.birthday}}</div>
+					{{cif_mas_tmp_Form.birthday.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>客户电子邮件：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_tmp_Form.email}}</div>
+					{{cif_mas_tmp_Form.email.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>客户手机：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_tmp_Form.handphone}}</div>
+					{{cif_mas_tmp_Form.handphone.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>功能：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_tmp_Form.func}}</div>
+					{{cif_mas_tmp_Form.func.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>创建日期：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_tmp_Form.inp_date}}</div>
+					{{cif_mas_tmp_Form.inp_date.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>修改日期：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_tmp_Form.app_date}}</div>
+					{{cif_mas_tmp_Form.app_date.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<a name="edit" href="/cif/cifmas_tmp_amd/{{ cif_mas_tmp_Form.customer_id}}/" ><span class="glyphicon glyphicon-pencil"></span>&nbsp&nbsp编辑</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<a name="delete" href="javascript:" onclick="del_cifmas_tmp(this,'{{cif_mas_tmp_Form.customer_id}}')"><span class="glyphicon glyphicon-trash"></span>&nbsp&nbsp删除</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<a name="back" href="/cif/cifmas_tmp_lst/" ><span class="glyphicon glyphicon-backward"></span>&nbsp&nbsp返回</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<a name="approve" href="/cif/cifmas_tmp_app/{{ cif_mas_tmp_Form.customer_id}}/" ><span class="fa fa-check-square"></span>&nbsp&nbsp复核</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript"src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+<script type="text/javascript" src='{% static "js/layer.js" %}'></script>
+<script>
+	function del_cifmas_tmp(the, customer_id) {
+		var first_name="{{ cif_mas_tmp_Form.last_name}}";
+		var last_name="{{ cif_mas_tmp_Form.first_name}}";
+		name=last_name+first_name;
+		var func="cifmas_list";
+		var index = layer.open
+		({
+			type : 1,
+			skin : "layui-layer-rim",
+			title : "删除客户",
+			area : [ '400px', '200px' ],
+			content : '<div class="text-center" style="margin-top:20px"><p>是否确定删除客户："'+name+'"</p></div>',
+			btn : [ '确定', '取消' ],
+			yes : function(index, layero) {
+				$.ajax
+				({
+					url : '{% url "cif:cifmas_tmp_del" %}',
+					type : 'POST',
+					data : {
+						"customer_id"  :customer_id,
+						"func"     :func,
+					},
+					success : function(e) {
+						if (e == "000000") {
+							layer.msg("已删除");
+							window.location.href='{% url "cif:cifmas_tmp_lst" %}';
+						} else {
+							layer.msg("删除失败");
+						}
+					},
+				});
+			},
+		});
+	}
+</script>
+
+{% endblock %}
+
+

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}my information{% endblock %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="row text-center vertical-middle-sm">
+	<h1>My Information</h1>
+	<div class="col-md-6">
+		<div class="row ">
+			<label class="col-md-5 control-label text-right"><span>User name:</span></label>
+			<div class="col-md-6 text-left">{{ user.username }}</div>
+		</div>
+		<div class="row">
+			<label class="col-md-5 control-label text-right"><span>Email:</span></label>
+			<div class="col-md-6 text-left">{{ user.email }}</div>
+		</div>
+		
+		<div class="row">
+			<label class="col-md-5 control-label text-right"><span>Birthday:</span></label>
+			<div class="col-md-6 text-left">{{ userprofile.birth }}</div>
+		</div>
+		<div class="row">
+			<label class="col-md-5 control-label text-right"><span>Phone:</span></label>
+			<div class="col-md-6 text-left">{{ userprofile.phone }}</div>
+		</div>
+		
+		<div class="row">
+			<label class="col-md-5 control-label text-right"><span>School:</span></label>
+			<div class="col-md-6 text-left">{{ userinfo.school }}</div>
+		</div>
+		<div class="row">
+			<label class="col-md-5 control-label text-right"><span>Company:</span></label>
+			<div class="col-md-6 text-left">{{ userinfo.company }}</div>
+		</div>
+		<div class="row">
+			<label class="col-md-5 control-label text-right"><span>Profession:</span></label>
+			<div class="col-md-6 text-left">{{ userinfo.profession }}</div>
+		</div>
+		<div class="row">
+			<label class="col-md-5 control-label text-right"><span>Address:</span></label>
+			<div class="col-md-6 text-left">{{ userinfo.address }}</div>
+		</div>
+		<div class="row">
+			<label class="col-md-5 control-label text-right"><span>About me:</span></label>
+			<div class="col-md-6 text-left">{{ userinfo.aboutme }}</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div style="margin-right:100px">
+		{% if userinfo.photo %}
+			{{ userinfo.photo | striptags }}
+			<img name="user_face" src="{{ userinfo.photo | striptags }}" class="img-circle" id="my_photo" name="user_face">
+		{% else %}
+			<img name="user_face" src="{% static 'images/newton.jpg' %}" class="img-circle" id="my_photo" width="304" height="236">
+		{% endif %}
+		</div>
+		<div style="margin-right:100px">
+			<button class="btn btn-primary btn-lg" id="upload_image" onclick="upload_image_layer()">
+				upload my photo
+			</button>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+	<script type="text/javascript" src='{% static "js/layer.js" %}'></script>
+	<script>
+		function upload_image_layer(){
+			layer.open({
+				title:"upload your face",
+				area:['1000px','600px'],
+				type:2,
+				content:"{% url 'account:my_image'%}"
+			})	
+		}
+	</script>
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends "kernal/base.html" %}
+{% load staticfiles %}
+{% block title%}显示菜单信息{% endblock %}
+{% block content %}
+
+<div class="row text-center vertical-middle-sm">
+	<h3>显示菜单信息(经办)</h3>
+	<h1></h1>
+	<div class="row">
+		<div class="col-md-6">
+			<form class="form-horizontal" action="." method="post">
+				{% csrf_token %}
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>菜单序号：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_tmp_form.id}}</div>
+					{{menu_mas_tmp_form.id.errors }}
+				</div>
+				
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>菜单级别：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_tmp_form.menu_lvl}}</div>
+					{{menu_mas_tmp_form.menu_lvl.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>父菜单ID：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_tmp_form.menu_parent_id}}</div>
+					{{menu_mas_tmp_form.menu_parent_id.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>菜单名称：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_tmp_form.menu_name}}</div>
+					{{menu_mas_tmp_form.menu_name.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>菜单短描述：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_tmp_form.menu_sht_desc}}</div>
+					{{menu_mas_tmp_form.menu_sht_desc.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>菜单长描述：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_tmp_form.menu_long_desc}}</div>
+					{{menu_mas_tmp_form.menu_long_desc.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>状态：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_tmp_form.status}}</div>
+					{{menu_mas_tmp_form.status.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>功能：</span>
+					</div>
+					<div class="col-md-8 text-left">{{ menu_mas_tmp_form.func}}</div>
+					{{menu_mas_tmp_form.func.errors }}
+				</div>
+
+
+				<div class="row" style="margin-top: 10px;">
+					<a name="edit" href="/kernal/menu_mas_tmp_amd/{{ menu_mas_tmp_form.id }}/" ><span class="glyphicon glyphicon-pencil"></span>&nbsp&nbsp编辑</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<a name="delete" href="javascript:" onclick="del_menu_mas_tmp(this,'{{menu_mas_tmp_form.id}}')"><span class="glyphicon glyphicon-trash"></span>&nbsp&nbsp删除</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<a name="back" href="/kernal/menu_mas_tmp_lst/" ><span class="glyphicon glyphicon-backward"></span>&nbsp&nbsp返回</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+					<a name="approve" href="/kernal/menu_mas_tmp_app/{{ menu_mas_tmp_form.id}}/" ><span class="fa fa-check-square"></span>&nbsp&nbsp复核</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript"src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+<script type="text/javascript" src='{% static "js/layer.js" %}'></script>
+<script>
+	function del_menu_mas_tmp(the, id) {
+		var menu_name="{{ menu_mas_tmp_form.menu_name}}";
+		name=menu_name;
+		var func="menu_mas_tmp_lst";
+		var index = layer.open
+		({
+			type : 1,
+			skin : "layui-layer-rim",
+			title : "删除角色",
+			area : [ '400px', '200px' ],
+			content : '<div class="text-center" style="margin-top:20px"><p>是否确定删除菜单："'+name+'"</p></div>',
+			btn : [ '确定', '取消' ],
+			yes : function(index, layero) {
+				$.ajax
+				({
+					url : '{% url "kernal:menu_mas_tmp_del" %}',
+					type : 'POST',
+					data : {
+						"id":id,
+						"func":func,
+					},
+					success : function(e) {
+						if (e == "000000") {
+							layer.msg("已删除");
+							window.location.href='{% url "kernal:menu_mas_tmp_lst" %}';
+						} else {
+							layer.msg("删除失败");
+						}
+					},
+				});
+			},
+		});
+	}
+</script>
+
+{% endblock %}
+
+

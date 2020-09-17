@@ -1,0 +1,100 @@
+{% extends "kernal/base.html" %}
+{% load staticfiles %} 
+{% block title %}角色信息查询{% endblock %}
+{% block content %}
+
+<div class="row text-center vertical-middle-sm">
+	<h3>角色信息查询(经办)</h3>
+	<h1></h1>
+</div>
+	
+<div>
+	<p class="text-right">
+		<a id="role_mas_tmp_add" onclick="role_mas_add()"><span class="glyphicon glyphicon-plus"></span>添加角色</a>
+	</p>
+	<table class="table table-hover">
+		<tr>
+			<td>角色序号</td>
+			<td>角色</td>
+			<td>角色描述</td>
+			<td>电子邮件</td>
+			<td>联系手机</td>
+			<td>状态</td>
+			<td>操作</td>
+		</tr>
+		{% for role_mas_tmp in role_mas_tmp_lst %}
+		<tr>
+			<td><a  href="{{ role_mas_tmp.get_absolute_url_dsp }}">{{ role_mas_tmp.id }}</a></td>
+			<td>{{ role_mas_tmp.role_name }}</td>
+			<td>{{ role_mas_tmp.role_desc }}</td>
+			<td>{{ role_mas_tmp.email }}</td>
+			<td>{{ role_mas_tmp.handphone }}</td>
+			<td>
+				{% if role_mas_tmp.status == 'A' %}正常{% endif %}
+				{% if role_mas_tmp.status == 'S' %}挂起{% endif %}
+				{% if role_mas_tmp.status == 'D' %}关闭{% endif %}
+			</td>
+			<td>
+				<a name="edit" href="{{ role_mas_tmp.get_absolute_url_amd }}" ><span class="glyphicon glyphicon-pencil"></span></a>
+				<a name="delete" href="javascript:" onclick="del_role_mas_tmp(this, '{{role_mas_tmp.id}}')"><span class="glyphicon glyphicon-trash"></span></a>
+			</td>
+		</tr>
+		{% empty %}
+		<p>没有发现记录</p>
+		{% endfor %}
+	</table>
+	<table class="table">
+	<tr>
+		<td width="40%"></td>
+		<td width="33%">{% include "paginator.html" %}</td>
+		<td width="33%"></td>
+	</tr>
+	</table>
+</div>
+
+<script type="text/javascript"
+	src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+<script type="text/javascript" src='{% static "js/layer.js" %}'></script>
+<script>
+	function role_mas_add() {
+		window.location.href="{% url "kernal:role_mas_tmp_add" %}";
+	}
+	
+	function del_role_mas_tmp(the, id) {
+		var role_name=$(the).parents("tr").children("td").eq(1).text();
+		var role_desc=$(the).parents("tr").children("td").eq(2).text();
+
+		name=role_name + " " + role_desc;
+		var func="role_mas_tmp_lst";
+		var index = layer.open
+		({
+			type : 1,
+			skin : "layui-layer-rim",
+			title : "删除客户",
+			area : [ '400px', '200px' ],
+			content : '<div class="text-center" style="margin-top:20px"><p>是否确定删除角色："'+name+'"</p></div>',
+			btn : [ '确定', '取消' ],
+			yes : function(index, layero) {
+				$.ajax
+				({
+					url : '{% url "kernal:role_mas_tmp_del" %}',
+					type : 'POST',
+					data : {
+						"id"  :id,
+						"func":func,
+					},
+					success : function(e) {
+						if (e == "000000") {
+							parent.location.reload();
+							layer.msg("已删除");
+						} else {
+							layer.msg("删除失败");
+						}
+					},
+				});
+			},
+		});
+	}
+</script>
+
+{% endblock %}

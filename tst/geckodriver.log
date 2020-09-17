@@ -1,0 +1,33 @@
+1545137981011	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\user\\AppData\\Local\\Temp\\rust_mozprofile.IVX3QgyBHPaq"
+1545137984229	Marionette	INFO	Listening on port 52414
+1545137984400	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://sbeacon.sina.com.cn/h.js, line 1: ReferenceError: etag_ngx_str is not defined
+JavaScript warning: https://n.sinaimg.cn/index/js/shms2.js?v=20180614, line 289: unreachable code after return statement
+JavaScript error: https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/plugins/every_cookie_4644b13.js, line 4: ReferenceError: c is not defined
+[Parent 9688, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Parent 9688, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 11872, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium[Child 15216, Chrome_ChildThread] WARNING: pipe error: 109:/ file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+src/chr[Child 15216, Chrome_Chilome/common/ipc_channel_win.cc, line 346
+[Child 11872, [Parent 9688, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 7556, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 751545138029217	Marionette	INFO	Stopped listening on port 52414
+1545138037690	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\user\\AppData\\Local\\Temp\\rust_mozprofile.JIEhZlkzvvyl"
+1545138040026	Marionette	INFO	Listening on port 52658
+1545138040463	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/plugins/every_cookie_4644b13.js, line 4: ReferenceError: c is not defined
+JavaScript error: https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=Sel&json=1&p=3&sid=26522_1456_21115_28132_27750_22072&req=2&csor=3&pwd=Se&cb=jQuery110205565246440555323_1545138041059&_=1545138041063, line 1: TypeError: jQuery110205565246440555323_1545138041059 is not a function
+JavaScript error: https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=Seleniu&json=1&p=3&sid=26522_1456_21115_28132_27750_22072&req=2&csor=7&pwd=Seleni&cb=jQuery110205565246440555323_1545138041059&_=1545138041067, line 1: TypeError: jQuery110205565246440555323_1545138041059 is not a function
+JavaScript error: https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=Se&json=1&p=3&sid=26522_1456_21115_28132_27750_22072&req=2&csor=2&pwd=S&cb=jQuery110205565246440555323_1545138041059&_=1545138041062, line 1: TypeError: jQuery110205565246440555323_1545138041059 is not a function
+JavaScript error: https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=Seleni&json=1&p=3&sid=26522_1456_21115_28132_27750_22072&req=2&csor=6&pwd=Selen&cb=jQuery110205565246440555323_1545138041059&_=1545138041066, line 1: TypeError: jQuery110205565246440555323_1545138041059 is not a function
+JavaScript error: https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=Sele&json=1&p=3&sid=26522_1456_21115_28132_27750_22072&req=2&csor=4&pwd=Sel&cb=jQuery110205565246440555323_1545138041059&_=1545138041064, line 1: TypeError: jQuery110205565246440555323_1545138041059 is not a function
+JavaScript error: https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=Selenium2&json=1&p=3&sid=26522_1456_21115_28132_27750_22072&req=2&csor=9&pwd=Selenium&cb=jQuery110205565246440555323_1545138041059&_=1545138041069, line 1: TypeError: jQuery110205565246440555323_1545138041059 is not a function
+JavaScript error: https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=Selenium&json=1&p=3&sid=26522_1456_21115_28132_27750_22072&req=2&csor=8&pwd=Seleniu&cb=jQuery110205565246440555323_1545138041059&_=1545138041068, line 1: TypeError: jQuery110205565246440555323_1545138041059 is not a function
+JavaScript error: https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=Selen&json=1&p=3&sid=26522_1456_21115_28132_27750_22072&req=2&csor=5&pwd=Sele&cb=jQuery110205565246440555323_1545138041059&_=1545138041065, line 1: TypeError: jQuery110205565246440555323_1545138041059 is not a function
+1545138041880	Marionette	INFO	Stopped listening on port 52658
+[Parent 8216, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Parent 8216, Gecko_IOThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 1780, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 1780, Chrome_Child[Child 14656, Chrome_ChildThread] WARNING: pipe error: 232: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 513
+[Child 14656, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 14656, Chrom[Child 13528, Chrome_ChildThread] WARNING: pipe error: 109: file z:/build/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 1[

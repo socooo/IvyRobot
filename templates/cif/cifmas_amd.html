@@ -1,0 +1,154 @@
+{% extends "cif/base.html" %}
+{% load staticfiles %}
+{% block title%}修改客户信息{% endblock %}
+{% block content %}
+
+<div class="row text-center vertical-middle-sm">
+	<h3>修改客户信息</h3>
+	<h1></h1>
+	<div class="row">
+		<div class="col-md-6">
+			<form class="form-horizontal" action="." method="post">
+				{% csrf_token %} {{ cif_mas_Form.non_field_errors }}
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ cif_mas_Form.customer_id.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_Form.customer_id}}</div>
+					{{cif_mas_Form.customer_id.errors }}
+				</div>
+				
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ cif_mas_Form.id_no.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_Form.id_no}}</div>
+					{{cif_mas_Form.id_no.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ cif_mas_Form.id_type.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_Form.id_type}}</div>
+					{{cif_mas_Form.id_type.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ cif_mas_Form.id_country.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_Form.id_country}}</div>
+					{{cif_mas_Form.id_country.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ cif_mas_Form.first_name.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_Form.first_name}}</div>
+					{{cif_mas_Form.first_name.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ cif_mas_Form.last_name.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_Form.last_name}}</div>
+					{{cif_mas_Form.last_name.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ cif_mas_Form.address.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_Form.address }}</div>
+					<span class="error-msg">{{cif_mas_Form.address.errors }}</span>
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ cif_mas_Form.age.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_Form.age}}</div>
+					{{cif_mas_Form.age.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ cif_mas_Form.balance.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_Form.balance}}</div>
+					{{cif_mas_Form.balance.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ cif_mas_Form.birthday.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_Form.birthday}}</div>
+					{{cif_mas_Form.birthday.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ cif_mas_Form.email.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_Form.email}}</div>
+					{{cif_mas_Form.email.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ cif_mas_Form.handphone.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_Form.handphone}}</div>
+					{{cif_mas_Form.handphone.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ cif_mas_Form.status.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_Form.status}}</div>
+					{{cif_mas_Form.status.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ cif_mas_Form.func.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_Form.func}}</div>
+					{{cif_mas_Form.func.errors }}
+				</div>
+				
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ cif_mas_Form.created.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_Form.inp_date}}</div>
+					{{cif_mas_Form.created.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-md-4 text-right">
+						<span>{{ cif_mas_Form.app_date.label_tag }}</span>
+					</div>
+					<div class="col-md-8 text-left">{{ cif_mas_Form.app_date}}</div>
+					{{cif_mas_Form.updated.errors }}
+				</div>
+
+				<div class="row" style="margin-top: 10px;">
+					<input type="submit" class="btn btn-primary" value="提交">
+					<input type="button" class="btn btn-primary" name="back" value="返回" onClick="javascript:history.back()">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript"src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+{% endblock %}
+
+

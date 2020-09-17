@@ -1,0 +1,99 @@
+{% extends "kernal/base.html" %}
+{% load staticfiles %} 
+{% block title %}用户角色关联信息查询{% endblock %}
+{% block content %}
+
+<div class="row text-center vertical-middle-sm">
+	<h3>用户角色关联信息查询(经办)</h3>
+	<h1></h1>
+</div>
+	
+<div>
+	<p class="text-right">
+		<a id="user_role_mas_tmp_add" onclick="menu_mas_add()"><span class="glyphicon glyphicon-plus"></span>添加菜单</a>
+	</p>
+	<table class="table table-hover">
+		<tr>
+			<td>关系编号</td>
+			<td>用户名称</td>
+			<td>角色名称</td>
+			<td>用户与角色关系</td>
+			<td>状态</td>
+			<td>操作</td>
+		</tr>
+		{% for user_role_mas_tmp in user_role_mas_tmp_lst %}
+		<tr>
+			<td><a  href="{{ user_role_mas_tmp.get_absolute_url_dsp }}">{{ user_role_mas_tmp.id }}</a></td>
+			<td>{{ user_role_mas_tmp.user.username }}</td>
+			<td>{{ user_role_mas_tmp.role.role_name }}</td>
+			<td>{{ user_role_mas_tmp.user_role_name }}</td>
+			<td>
+				{% if user_role_mas_tmp.status == 'A' %}正常{% endif %}
+				{% if user_role_mas_tmp.status == 'S' %}挂起{% endif %}
+				{% if user_role_mas_tmp.status == 'D' %}关闭{% endif %}
+			</td>
+			<td>
+				<a name="edit" href="{{ user_role_mas_tmp.get_absolute_url_amd }}" ><span class="glyphicon glyphicon-pencil"></span></a>
+				<a name="delete" href="javascript:" onclick="del_user_role_mas_tmp(this, '{{user_role_mas_tmp.id}}')"><span class="glyphicon glyphicon-trash"></span></a>
+			</td>
+		</tr>
+		{% empty %}
+		<p>没有发现记录</p>
+		{% endfor %}
+	</table>
+	<table class="table">
+	<tr>
+		<td width="40%"></td>
+		<td width="33%">{% include "paginator.html" %}</td>
+		<td width="33%"></td>
+	</tr>
+	</table>
+</div>
+
+<script type="text/javascript"
+	src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+<script type="text/javascript" src='{% static "js/layer.js" %}'></script>
+<script>
+	function menu_mas_add() {
+		window.location.href="{% url "kernal:user_role_mas_tmp_add" %}";
+	}
+	
+	function del_user_role_mas_tmp(the, id) {
+
+		var username=$(the).parents("tr").children("td").eq(1).text();
+		var user_role_name=$(the).parents("tr").children("td").eq(4).text();
+
+		name=username  + ": " + user_role_name;
+		var func="user_role_mas_tmp_lst";
+		var index = layer.open
+		({
+			type : 1,
+			skin : "layui-layer-rim",
+			title : "删除客户",
+			area : [ '400px', '200px' ],
+			content : '<div class="text-center" style="margin-top:20px"><p>是否确定删除用户角色关系："'+name+'"</p></div>',
+			btn : [ '确定', '取消' ],
+			yes : function(index, layero) {
+				$.ajax
+				({
+					url : '{% url "kernal:user_role_mas_tmp_del" %}',
+					type : 'POST',
+					data : {
+						"id"  :id,
+						"func":func,
+					},
+					success : function(e) {
+						if (e == "000000") {
+							parent.location.reload();
+							layer.msg("已删除");
+						} else {
+							layer.msg("删除失败");
+						}
+					},
+				});
+			},
+		});
+	}
+</script>
+
+{% endblock %}

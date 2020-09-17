@@ -1,0 +1,60 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block title %}{% endblock %}</title>
+	<!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+	<link rel="stylesheet" href='{% static "css/bootstrap337.min.css" %}'  media="screen">
+	<link rel="stylesheet" href='{% static "datepicker/css/datepicker.css" %}'  media="screen">
+    <style>
+      .p20{
+        padding:20px;
+      }
+      .mt20{
+        margin-top:20px;
+      }
+      .mt40{
+        margin-top:40px;
+      }
+      .mt10{
+        margin-top:10px;
+      }
+      .hide{
+        display: none;
+      }
+      body{
+        height:1000px;
+      }
+    </style>
+
+</head>
+<body>
+	<div class="container">
+		{% include "header.html" %}
+		<div class="col-md-2">
+			<!--{% include "article/leftslider.html" %}-->
+			{% include "cif/leftslider.html" %}
+		</div>
+		<div class="col-md-10">
+		{% block content %}
+		{% endblock %}
+		</div>
+		<table class="table-hover">
+		<tr>
+			<td width="50%"></td>
+			<td width="20%">{% include "footer.html" %}</td>
+			<td width="30%"></td>
+		</tr>
+		</table>
+<!-- 		{% include "footer.html" %} -->
+	</div>
+</body>
+
+<script type="text/javascript" 	src='{% static "js/datepicker.all.js" %}'></script>
+<script type="text/javascript" 	src='{% static "datepicker/js/plugins/moment.min.js" %}'></script>
+<script type="text/javascript" 	src='{% static "datepicker/js/datepicker.all.js" %}'></script>
+
+</html>
